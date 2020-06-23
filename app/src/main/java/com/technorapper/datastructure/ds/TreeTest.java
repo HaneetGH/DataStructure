@@ -4,7 +4,7 @@ import java.util.Stack;
 
 public class TreeTest {
 
-    Stack<Integer> visitedNode = new Stack<>();
+ 
     public static void main(String[] args) {
 
         TreeNode treeNode = TreeTest();
