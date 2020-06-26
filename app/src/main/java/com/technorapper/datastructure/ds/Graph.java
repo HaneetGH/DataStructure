@@ -55,7 +55,7 @@ public class Graph
 
     public static void main(String args[])
     {
-        com.bt.app.ds.Graph g = new com.bt.app.ds.Graph(4);
+        com.technorapper.datastructure.ds.Graph g = new com.technorapper.datastructure.ds.Graph(4);
 
         g.addEdge(0, 1);
         g.addEdge(0, 2);
