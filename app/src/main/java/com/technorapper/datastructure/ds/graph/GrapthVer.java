@@ -1,4 +1,4 @@
-package com.technorapper.datastructure.ds;
+package com.technorapper.datastructure.ds.graph;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -110,7 +110,7 @@ class Main {
     {
 
         // Object of graph is created.
-        com.technorapper.datastructure.ds.GrapthVer<Integer> g = new com.technorapper.datastructure.ds.GrapthVer<Integer>();
+        GrapthVer<Integer> g = new GrapthVer<Integer>();
 
         // edges are added.
         // Since the graph is bidirectional,

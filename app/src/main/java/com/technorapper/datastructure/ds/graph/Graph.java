@@ -1,4 +1,4 @@
-package com.technorapper.datastructure.ds;
+package com.technorapper.datastructure.ds.graph;
 
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -55,7 +55,7 @@ public class Graph
 
     public static void main(String args[])
     {
-        com.technorapper.datastructure.ds.Graph g = new com.technorapper.datastructure.ds.Graph(4);
+        Graph g = new Graph(4);
 
         g.addEdge(0, 1);
         g.addEdge(0, 2);
