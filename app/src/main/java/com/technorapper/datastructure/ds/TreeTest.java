@@ -26,12 +26,33 @@ public class TreeTest {
         int[] postordder = {9, 15, 7, 20, 3};
         //maxLevelSum1(treeNode);
 
-       // buildTree(inorder, postordder);
+        // buildTree(inorder, postordder);
 
-        int[] array = {4,1,-1,2,-1,2,3};
+        // int[] array = {4,1,-1,2,-1,2,3};
 
-        topKFrequent(array, 2);
+        // topKFrequent(array, 2);
+        int[] arr = {3, 2, 6};
+        twoSum(arr, 6);
     }
+
+    public static int[] twoSum(int[] nums, int target) {
+        Map <Integer, Integer> map = new HashMap<Integer, Integer> ();
+        for(int i = 0; i <  nums.length; i++){
+
+            if(map.containsKey(nums[i]))//check if the complement has been mapped
+                return new int [] {i, map.get(nums[i])};
+            else {
+                int diff = target - nums[i];//put the compliment if not
+                map.put(diff, i);
+            }
+
+        }
+
+        return null;
+    }
+
+
+
 
     public static int[] topKFrequent(int[] nums, int k) {
         if (nums.length == 1)
@@ -49,8 +70,6 @@ public class TreeTest {
         }
 
 
-
-
         int count = -1;
 
         Object[] a = map.entrySet().toArray();
@@ -64,11 +83,10 @@ public class TreeTest {
         for (Object e : a) {
 
 
-            result[++count]= ((Map.Entry<Integer, Integer>) e).getKey();
-            if(count==k-1)
+            result[++count] = ((Map.Entry<Integer, Integer>) e).getKey();
+            if (count == k - 1)
                 break;
         }
-
 
 
         return result;

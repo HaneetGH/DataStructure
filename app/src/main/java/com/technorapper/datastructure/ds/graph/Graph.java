@@ -3,7 +3,7 @@ package com.technorapper.datastructure.ds.graph;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-public class Graph
+public class  Graph
 {
     private int V;   // No. of vertices
 
