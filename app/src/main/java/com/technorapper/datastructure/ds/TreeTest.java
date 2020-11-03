@@ -284,5 +284,19 @@ class TreeNode {
         }
     }
 
+    public int isPrefixOfWord(String sentence, String searchWord) {
+        String[] strArray = sentence.split(" ");
 
+        for(int i = 0 ;i<strArray.length;i++)
+        {
+
+            if(searchWord.length() <= strArray[i].length())
+            {
+                if(strArray[i].startsWith(searchWord)) {
+                    return i;
+                }
+            }
+        }
+        return 0;
+    }
 }
