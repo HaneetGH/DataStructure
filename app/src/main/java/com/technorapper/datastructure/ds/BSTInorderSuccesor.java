@@ -1,5 +1,8 @@
 package com.technorapper.datastructure.ds;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BSTInorderSuccesor {
 
     /* A binary tree node has data,
@@ -7,6 +10,7 @@ public class BSTInorderSuccesor {
        and a pointer to right child */
     static class node {
         int data;
+        boolean visited = false;
         node left;
         node right;
         node parent;
@@ -15,6 +19,137 @@ public class BSTInorderSuccesor {
     ;
 
     static node inOrderSuccessor(
+            node root,
+            node n) {
+
+        // step 1 of the above algorithm
+        if (n.right != null)
+            return minValue(n.right);
+
+        node succ = null;
+
+        // Start from root and search for
+        // successor down the tree
+        while (root != null) {
+            if (n.data < root.data) {
+                succ = root;
+                root = root.left;
+            } else if (n.data > root.data)
+                root = root.right;
+            else
+                break;
+        }
+        return succ;
+    }
+
+    static List<Integer> values = new ArrayList<>();
+
+    static node postOrder(
+            node root) {
+
+
+        node succ = null;
+
+        // Start from root and search for
+        // successor down the tree
+        while (root != null) {
+
+            if (root.left != null && !root.left.visited) {
+                if (root.left.left == null) {
+                    values.add(root.left.data);
+                    root.left.visited = true;
+                    root = root.left;
+                } else {
+                    root = root.left;
+                }
+            } else if (root.right != null && !root.right.visited) {
+
+                postOrder(root.right);
+            } else if (!root.visited) {
+                values.add(root.data);
+                root.visited = true;
+                root = root.parent;
+
+            } else if (root.visited) {
+                root = root.parent;
+            }
+        }
+        return succ;
+    }
+
+    static node preOrder(
+            node root) {
+
+
+        node succ = null;
+
+        // Start from root and search for
+        // successor down the tree
+        while (root != null) {
+            if (!root.visited) {
+                values.add(root.data);
+                root.visited = true;
+                if (root.left != null)
+                    root = root.left;
+                else if (root.right != null)
+                    root = root.right;
+                else root = root.parent;
+
+            } else if (root.left != null && !root.left.visited) {
+                if (root.left.left == null) {
+                    values.add(root.left.data);
+                    root.left.visited = true;
+                    root = root.left;
+                } else {
+                    root = root.left;
+                }
+            } else if (root.right != null && !root.right.visited) {
+
+                preOrder(root.right);
+            } else if (root.visited) {
+                root = root.parent;
+            }
+        }
+        return succ;
+    }
+
+    static node inOrder(
+            node root) {
+
+
+        node succ = null;
+
+        // Start from root and search for
+        // successor down the tree
+        while (root != null) {
+
+            if (root.left != null && !root.left.visited) {
+                if (root.left.left == null) {
+                    values.add(root.left.data);
+                    root.left.visited = true;
+                    root = root.left;
+                } else {
+                    root = root.left;
+                }
+            } else if (!root.visited) {
+                values.add(root.data);
+                root.visited = true;
+                if (root.right != null)
+                    inOrder(root.right);
+                else
+                    root = root.parent;
+            } else if (root.visited) {
+                root = root.parent;
+            } else if (root.right != null && !root.right.visited) {
+
+                // inOrder(root.right);
+            }
+        }
+        return succ;
+    }
+
+
+    static node postOrderSuccessor(
             node root,
             node n) {
 
@@ -115,6 +250,8 @@ public class BSTInorderSuccesor {
 
         // Function Call
         succ = inOrderSuccessor(root, temp);
+
+        preOrder(root);
         if (succ != null)
             System.out.printf(
                     "\n Inorder Successor of %d is %d ",
