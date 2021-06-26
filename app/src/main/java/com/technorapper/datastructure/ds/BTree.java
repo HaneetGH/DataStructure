@@ -1,5 +1,6 @@
 package com.technorapper.datastructure.ds;
 
+
 public class BTree {
     // Root of Binary Tree
     NodeB root;
@@ -73,17 +74,38 @@ public class BTree {
         tree.root.left.left = new NodeB(4);
         tree.root.left.right = new NodeB(5);
 
-        System.out.println("Preorder traversal of binary tree is ");
-        tree.printPreorder();
+       // System.out.println("Preorder traversal of binary tree is ");
+       // tree.printPreorder();
 
-        System.out.println("\nInorder traversal of binary tree is ");
-        tree.printInorder();
+      //  System.out.println("\nInorder traversal of binary tree is ");
+     //   tree.printInorder();
 
-        System.out.println("\nPostorder traversal of binary tree is ");
-        tree.printPostorder();
+      //  System.out.println("\nPostorder traversal of binary tree is ");
+       // tree.printPostorder();
+
+        System.out.println(returnSol("xxyyxyxxyxyy")+"");
     }
 
 
+    public static int returnSol(String s) {
 
+        char[] str = s.toCharArray();
+
+        int xnum = 0;
+        int yNum = 0;
+
+        for (char c : str) {
+            if (c == 'x') {
+                xnum++;
+            } else if (c == 'y')
+                yNum++;
+        }
+
+        if (xnum % 2 == 0 && yNum % 2 == 0) {
+            if (xnum == yNum)
+                return 1;
+            else return 0;
+        } else return 0;
+    }
 
 }
