@@ -40,16 +40,20 @@ public class FloodFilling {
     public static void main(String[] args) {
 
         int[] arr = {1, 1, 7, 7, 5, 3};
-        System.out.println(checkOcc(arr));
+        int anyNumber = 20;
+        System.out.println(idPrimeWithRoot(anyNumber));
+
     }
 
 
     public static int valM = 2;
 
     public static boolean isPrime(int anyNumber) {
+
+
+
         if (anyNumber == 0 || anyNumber == 1) return false;
         if (anyNumber == valM) return true;
-
         if (anyNumber % valM == 0) return false;
         valM++;
 
@@ -57,8 +61,19 @@ public class FloodFilling {
 
     }
 
+    public static boolean idPrimeWithRoot(int anyNumber)
+    {
+
+
+        for (int i = 2; i <=Math.sqrt(anyNumber); i++) {
+            if(anyNumber%i==0)
+                return false;
+        }
+        return true;
+    }
+
     public static HashMap<Integer, Integer> checkOcc(int[] arr) {
-        HashMap<Integer, Integer> hashMap = new HashMap<Integer, Integer>();
+        HashMap<Integer, Integer> hashMap = new HashMap<>();
         for (int i = 0; i < arr.length; i++) {
             if (hashMap.containsKey(arr[i])) {
                 hashMap.put(arr[i], hashMap.get(arr[i]) + 1);
