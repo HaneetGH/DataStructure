@@ -1,5 +1,8 @@
 package com.technorapper.datastructure.ds;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class FloodFilling {
 
     // Dimentions of paint screen
@@ -35,23 +38,35 @@ public class FloodFilling {
 
     // Driver code
     public static void main(String[] args) {
-        int screen[][] = {{1, 1, 1, 1, 1, 1, 1, 1},
-                {1, 1, 1, 1, 1, 1, 0, 0},
-                {1, 0, 0, 1, 1, 0, 1, 1},
-                {1, 2, 2, 2, 2, 0, 1, 0},
-                {1, 1, 1, 2, 2, 0, 1, 0},
-                {1, 1, 1, 2, 2, 2, 2, 0},
-                {1, 1, 1, 1, 1, 2, 1, 1},
-                {1, 1, 1, 1, 1, 2, 2, 1},
-        };
-        int x = 4, y = 4, newC = 3;
-        floodFill(screen, x, y, newC, 2);
 
-        System.out.println("Updated screen after call to floodFill: ");
-        for (int i = 0; i < M; i++) {
-            for (int j = 0; j < N; j++)
-                System.out.print(screen[i][j] + " ");
-            System.out.println();
+        int[] arr = {1, 1, 7, 7, 5, 3};
+        System.out.println(checkOcc(arr));
+    }
+
+
+    public static int valM = 2;
+
+    public static boolean isPrime(int anyNumber) {
+        if (anyNumber == 0 || anyNumber == 1) return false;
+        if (anyNumber == valM) return true;
+
+        if (anyNumber % valM == 0) return false;
+        valM++;
+
+        return isPrime(anyNumber);
+
+    }
+
+    public static HashMap<Integer, Integer> checkOcc(int[] arr) {
+        HashMap<Integer, Integer> hashMap = new HashMap<Integer, Integer>();
+        for (int i = 0; i < arr.length; i++) {
+            if (hashMap.containsKey(arr[i])) {
+                hashMap.put(arr[i], hashMap.get(arr[i]) + 1);
+            } else {
+                hashMap.put(arr[i], 1);
+            }
         }
+
+        return hashMap;
     }
 }
