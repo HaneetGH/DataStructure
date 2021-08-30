@@ -2,7 +2,10 @@ package com.technorapper.datastructure.ds;
 
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Set;
+import java.util.SortedSet;
 import java.util.Stack;
+import java.util.TreeSet;
 
 
 class Solution {
@@ -15,21 +18,23 @@ class Solution {
             return traverseTree(root, k);
 
     }
+
     public int[] singleNumber(int[] nums) {
         int bitmask = 0;
-        for(int n: nums)
+        for (int n : nums)
             bitmask ^= n;
 
-        int diff = bitmask&(-bitmask);
+        int diff = bitmask & (-bitmask);
 
         int x = 0;
-        for(int n: nums){
-            if((diff&n) != 0)
+        for (int n : nums) {
+            if ((diff & n) != 0)
                 x ^= n;
         }
 
-        return new int[]{x,bitmask^x};
+        return new int[]{x, bitmask ^ x};
     }
+
     private static boolean traverseTree(TreeNode treeNode, int k) {
         TreeNode localTreee = treeNode;
         boolean isTrueo = false;
@@ -75,6 +80,7 @@ class Solution {
 
     }
 
+
     private static boolean printTree(TreeNode treeNode, int neededVal) {
         TreeNode localTreee = treeNode;
         boolean isFound = false;
@@ -118,31 +124,32 @@ class Solution {
 
 
     }
+
     public int maxLevelSum(TreeNode root) {
-        if(root==null) return 0;
+        if (root == null) return 0;
         Res res = new Res();
         Queue<TreeNode> q = new LinkedList<TreeNode>();
         q.offer(root);
         Integer level = 0;
-        while(q.size()>0){
+        while (q.size() > 0) {
             level += 1;
             Queue<TreeNode> nxtq = new LinkedList<TreeNode>();
             Integer layerSum = 0;
-            while(q.size()>0){
+            while (q.size() > 0) {
                 TreeNode curNode = q.poll();
                 layerSum += curNode.data;
-                if(curNode.left!=null){
+                if (curNode.left != null) {
                     nxtq.offer(curNode.left);
                 }
-                if(curNode.right!=null){
+                if (curNode.right != null) {
                     nxtq.offer(curNode.right);
                 }
             }
-            if(res.sum!=null){
-                if(layerSum > res.sum){
-                    res = new Res((Integer)level, (Integer)layerSum);
+            if (res.sum != null) {
+                if (layerSum > res.sum) {
+                    res = new Res((Integer) level, (Integer) layerSum);
                 }
-            }else{
+            } else {
                 res = new Res(level, layerSum);
             }
             q = nxtq;
@@ -151,15 +158,18 @@ class Solution {
     }
 }
 
-class Res{
+class Res {
     Integer level;
     Integer sum;
-    public Res(){
+
+    public Res() {
     }
-    public Res(Integer level, Integer sum){
+
+    public Res(Integer level, Integer sum) {
         this.level = level;
         this.sum = sum;
     }
+
     public class TreeNode {
         int val;
         TreeNode left;
@@ -178,4 +188,42 @@ class Res{
             this.right = right;
         }
     }
+
+}
+
+
+class A {
+    int x;
+
+    public static void main(String[] args) {
+        A p = new A();
+        A q = new A();
+        p.x = 1;
+        q.x = 1;
+        if (p == q) {
+            //false
+        }
+        p.equals(q);// true
+
+
+        int n = 14;
+        int k = 2;
+        System.out.println("The chosen place is "
+                + josephus(n, k));
+    }
+
+    static int josephus(int n, int k) {
+        if (n == 1)
+            return 1;
+        else
+
+            return (josephus(n - 1, k) + k - 1) % n + 1;
+
+        //Joseph Current josephus(n - 1, k) will change sward with  k - 1 and % n + 1 cause happeing in circle
+
+
+
+    }
+
+
 }

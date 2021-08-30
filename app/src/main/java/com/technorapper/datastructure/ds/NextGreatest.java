@@ -1,6 +1,8 @@
 package com.technorapper.datastructure.ds;
 
 import java.util.Arrays;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 public class NextGreatest {
 
@@ -86,9 +88,63 @@ public class NextGreatest {
         }
     }
 
+
+
+
+    public static void mergeTwoSortedList(int[] a, int[] b) {
+        SortedSet<Integer> sortedSet = new TreeSet<>();
+
+        for (Integer integer : a) {
+            sortedSet.add(integer);
+        }
+        for (Integer integer : b) {
+            sortedSet.add(integer);
+        }
+
+
+        System.out.println(sortedSet);
+
+
+    }
     public static void main(String[] args) {
-        char digits[] = {'5', '3', '4', '9', '7', '6'};
+        int[] digits = {1, 4, 7, 8, 9, 13};
+        int[] digits2 = {2, 4, 15, 18, 19, 20};
         int n = digits.length;
-        findNext(digits, n);
+        //findNext(digits, n);
+        mergeTwoSortedListWhile(digits, digits2);
+
+
+    }
+
+    public static void mergeTwoSortedListWhile(int[] arr1, int[] arr2) {
+        int[] arr3 = new int[arr1.length + arr2.length];
+        int i = 0, j = 0, k = 0;
+        int n1 = arr1.length;
+        int n2 = arr2.length;
+        // Traverse both array
+        while (i < n1 && j < n2) {
+            // Check if current element of first
+            // array is smaller than current element
+            // of second array. If yes, store first
+            // array element and increment first array
+            // index. Otherwise do same with second array
+            if (arr1[i] < arr2[j])
+                arr3[k++] = arr1[i++];
+            else
+                arr3[k++] = arr2[j++];
+        }
+
+        // Store remaining elements of first array
+        while (i < n1)
+            arr3[k++] = arr1[i++];
+
+        // Store remaining elements of second array
+        while (j < n2)
+            arr3[k++] = arr2[j++];
+
+
+        System.out.println(arr3);
+
+
     }
 }

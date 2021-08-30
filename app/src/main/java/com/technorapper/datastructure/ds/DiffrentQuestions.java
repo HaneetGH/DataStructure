@@ -4,17 +4,48 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class DiffrentQuestions {
+public class DiffrentQuestions implements sample,sample2 {
 
     public static void main(String[] args) {
 
 
         int[] arr = {2, 5, 10, 12, 15, 19, 22, 24};
         System.out.println(getArray(arr, 25));
+
+        String str1 = "blahaaaablah";
+        String str2 = "blah";
+        printIndex(str1, str2);
+
     }
+
+
+
+
+        static void printIndex(String str, String s)
+        {
+
+            boolean flag = false;
+            for (int i = 0; i < str.length() - s.length() + 1; i++) {
+                if (str.substring(i, i + s.length()).equals(s)) {
+                    System.out.print(i + " ");
+                    flag = true;
+                }
+            }
+
+            if (flag == false) {
+                System.out.println("NONE");
+            }
+        }
+
+
+
+
+
 
     public static void convert(String s) {
 
@@ -276,6 +307,10 @@ public class DiffrentQuestions {
     }
 
 
+    @Override
+    public void check() {
+
+    }
 }
 
 
