@@ -196,20 +196,14 @@ class A {
     int x;
 
     public static void main(String[] args) {
-        A p = new A();
-        A q = new A();
-        p.x = 1;
-        q.x = 1;
-        if (p == q) {
-            //false
-        }
-        p.equals(q);// true
 
 
-        int n = 14;
-        int k = 2;
-        System.out.println("The chosen place is "
-                + josephus(n, k));
+        int[] price = {5, 7, 12, 14, 2, 3, 8};
+        int sizeOfArray = price.length - 1;
+        int startingPos = 0;
+
+        System.out.println(givinMaxProfile(price, sizeOfArray, startingPos) + "");
+
     }
 
     static int josephus(int n, int k) {
@@ -222,6 +216,85 @@ class A {
         //Joseph Current josephus(n - 1, k) will change sward with  k - 1 and % n + 1 cause happeing in circle
 
 
+    }
+
+
+    static int givinMaxProfile(int[] price, int sizeOfArray, int startingPos) {
+
+        if (sizeOfArray >= startingPos) return 0;
+        int maxWhichHeCanBuild = 0;
+        for (int i = startingPos; i < sizeOfArray; i++) {
+
+
+            for (int j = i + 1; j <= sizeOfArray; j++) {
+
+                if (price[j] > price[i]) {
+
+                    int maxiMumResult = price[j] - price[i] + givinMaxProfile(price, startingPos, i - 1) + givinMaxProfile(price, j + 1, sizeOfArray);
+
+                    maxWhichHeCanBuild = Math.max(maxWhichHeCanBuild, maxiMumResult);
+                }
+
+            }
+
+
+        }
+
+        return maxWhichHeCanBuild;
+
+
+    }
+
+    static int givinMaxProfile1(int[] price, int sizeOfArray, int startingPos) {
+
+        if (sizeOfArray <= startingPos) return 0;
+        int maxWhichHeCanBuild = 0;
+        for (int i = 1; i < sizeOfArray; i++) {
+
+
+            if (price[i] > price[i - 1]) {
+
+                maxWhichHeCanBuild += price[i] - price[i - 1];
+
+
+            }
+
+
+        }
+
+        return maxWhichHeCanBuild;
+
+
+    }
+/*
+Test case 1
+Input : "a-bC%dEf-ghIj"
+Output : "j-Ih%gfE-dCba"
+
+*/
+
+    public void reverse(String str) {
+        char[] strArray = str.toCharArray();
+
+        int right = strArray.length - 1;
+        int left = 0;
+
+        while (left < right) {
+
+            if (!Character.isAlphabetic(strArray[left])) {
+                left++;
+            } else if (!Character.isAlphabetic(strArray[right]))
+                right--;
+
+            else {
+                char tempChar = strArray[left];
+                strArray[left] = strArray[right];
+                strArray[right] = tempChar;
+                left++;
+                right--;
+
+            }
+        }
 
     }
 
