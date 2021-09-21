@@ -204,8 +204,29 @@ class A {
 
         System.out.println(givinMaxProfile(price, sizeOfArray, startingPos) + "");
 
+        Parent aa = new Parent();
+        Child bb = new Child();
+
+        Parent ab = new Child();
+
+
+        bb.getName();
+        ab.getName();
+        aa.getName();
+
+
+    }
+    public static class Parent {
+        public void getName() {
+
+        }
     }
 
+    public static class Child extends Parent {
+        public void getName() {
+
+        }
+    }
     static int josephus(int n, int k) {
         if (n == 1)
             return 1;
@@ -297,6 +318,7 @@ Output : "j-Ih%gfE-dCba"
         }
 
     }
+
 
 
 }
