@@ -11,6 +11,7 @@ import java.util.TreeSet;
 class Solution {
     public boolean findTarget(TreeNode root, int k) {
 
+
         int neededVal = k - root.data;
         if (printTree(root, neededVal)) {
             return true;
@@ -198,7 +199,7 @@ class A {
     public static void main(String[] args) {
 
 
-        int[] price = {5, 7, 12, 14, 2, 3, 8};
+      /*  int[] price = {5, 7, 12, 14, 2, 3, 8};
         int sizeOfArray = price.length - 1;
         int startingPos = 0;
 
@@ -213,9 +214,13 @@ class A {
         bb.getName();
         ab.getName();
         aa.getName();
+*/
+        String[] str = {"Ram", "Sardar", "John", "Jacob"};
+        System.out.println(reverseThis(str, 0, str.length - 1));
 
 
     }
+
     public static class Parent {
         public void getName() {
 
@@ -227,6 +232,7 @@ class A {
 
         }
     }
+
     static int josephus(int n, int k) {
         if (n == 1)
             return 1;
@@ -319,6 +325,86 @@ Output : "j-Ih%gfE-dCba"
 
     }
 
+
+    public static String concatArray(int[] arr) {
+        String max = "";
+
+        // Declare a hash array of
+// size 10 and initialize
+// all the elements to zero
+        int[] hash = new int[10];
+
+// store the number of occurrences
+// of the digits in the given array
+// into the hash table
+        for (int i = 0; i < arr.length; i++) {
+            hash[arr[i]]++;
+        }
+
+// Traverse the hash in descending
+// order to print the required number
+        for (int i = 9; i >= 0; i--) {
+            // Print the number of
+            // times a digits occurs
+            for (int j = 0; j < hash[i]; j++)
+                max += i;
+        }
+        return max;
+    }
+
+    public int[] arrangeZeroAndOne(int[] arr) {
+
+        int left = 0, right = arr.length - 1;
+
+        while (left < right) {
+
+            while (arr[left] == 0 && left < right)
+                left++;
+
+
+            while (arr[right] == 1 && left < right)
+                right--;
+
+
+            if (left < right) {
+                arr[left] = 0;
+                arr[right] = 1;
+                left++;
+                right--;
+            }
+        }
+
+        return arr;
+    }
+
+
+    /**
+     * Reverse Elements in a collection -
+     * INPUT - A string collection ["Ram", "Sardar", "John", "Jacob"]
+     * OUTPUT - A string collection ["Jacob", "John", "Sardar", "Ram"]
+     * <p>
+     * Constraints -
+     * 1. Do not use any loop, for or while.
+     * 2. Create a recursive functions to reverse the order.
+     * 3. Do not use another collection object, just reverse the order in the same collection
+     */
+
+
+    public static String[] reverseThis(String[] strArray, int first, int last) {
+
+        if (first >= last)
+            return strArray;
+        String holder;
+
+
+        holder = strArray[first];
+        strArray[first] = strArray[last];
+        strArray[last] = holder;
+
+        //return reverseThis(strArray, ++first, --last);
+        return reverseThis(strArray, first+1, last-1);
+
+    }
 
 
 }
