@@ -259,5 +259,6 @@ public class BSTInorderSuccesor {
         else
             System.out.printf("\n Inorder Successor doesn't exit");
     }
+
 }
 

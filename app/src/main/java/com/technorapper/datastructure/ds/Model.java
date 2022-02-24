@@ -1,5 +1,7 @@
 package com.technorapper.datastructure.ds;
 
+import java.util.Objects;
+
 public class Model {
 
     String value;
@@ -15,11 +17,11 @@ public class Model {
 
     Model child;
 
-    public Model(String value, int level, Model child) {
+/*    public Model(String value, int level, Model child) {
         this.value = value;
         this.level = level;
         this.child = child;
-    }
+    }*/
 
     public String getValue() {
         return value;
@@ -35,5 +37,15 @@ public class Model {
 
     public void setLevel(int level) {
         this.level = level;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return 5;
     }
 }

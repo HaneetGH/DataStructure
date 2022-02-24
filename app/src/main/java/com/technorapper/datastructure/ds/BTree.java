@@ -1,14 +1,13 @@
 package com.technorapper.datastructure.ds;
 
 
+import java.util.Objects;
+
 public class BTree {
     // Root of Binary Tree
     NodeB root;
 
-    BTree()
-    {
-        root = null;
-    }
+
 
     /* Given a binary tree, print its nodes according to the
       "bottom-up" postorder traversal. */
@@ -108,4 +107,13 @@ public class BTree {
         } else return 0;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return 5;
+    }
 }

@@ -1,4 +1,9 @@
 package com.technorapper.datastructure.ds.sorting;
+
+import com.technorapper.datastructure.ds.BSTInorderSuccesor;
+import com.technorapper.datastructure.ds.BTree;
+import com.technorapper.datastructure.ds.Model;
+
 /*HeapSort
 
 Heap sort is a comparison based sorting technique based on Binary Heap data structure. It is similar to selection sort where we first find the maximum element and place the maximum element at the end. We repeat the same process for the remaining elements.
@@ -22,10 +27,8 @@ Heap Sort Algorithm for sorting in increasing order:
 How to build the heap?
 Heapify procedure can be applied to a node only if its children nodes are heapified. So the heapification must be performed in the bottom-up order.*/
 // Java program for implementation of Heap Sort
-public class HeapSort
-{
-    public void sort(int arr[])
-    {
+public class HeapSort {
+    public void sort(int arr[]) {
         int n = arr.length;
 
         // Build heap (rearrange array)
@@ -33,8 +36,7 @@ public class HeapSort
             heapify(arr, n, i);
 
         // One by one extract an element from heap
-        for (int i=n-1; i>0; i--)
-        {
+        for (int i = n - 1; i > 0; i--) {
             // Move current root to end
             int temp = arr[0];
             arr[0] = arr[i];
@@ -47,11 +49,10 @@ public class HeapSort
 
     // To heapify a subtree rooted with node i which is
     // an index in arr[]. n is size of heap
-    void heapify(int arr[], int n, int i)
-    {
+    void heapify(int arr[], int n, int i) {
         int largest = i; // Initialize largest as root
-        int l = 2*i + 1; // left = 2*i + 1
-        int r = 2*i + 2; // right = 2*i + 2
+        int l = 2 * i + 1; // left = 2*i + 1
+        int r = 2 * i + 2; // right = 2*i + 2
 
         // If left child is larger than root
         if (l < n && arr[l] > arr[largest])
@@ -62,8 +63,7 @@ public class HeapSort
             largest = r;
 
         // If largest is not root
-        if (largest != i)
-        {
+        if (largest != i) {
             int swap = arr[i];
             arr[i] = arr[largest];
             arr[largest] = swap;
@@ -74,17 +74,15 @@ public class HeapSort
     }
 
     /* A utility function to print array of size n */
-    static void printArray(int arr[])
-    {
+    static void printArray(int arr[]) {
         int n = arr.length;
-        for (int i=0; i<n; ++i)
-            System.out.print(arr[i]+" ");
+        for (int i = 0; i < n; ++i)
+            System.out.print(arr[i] + " ");
         System.out.println();
     }
 
     // Driver program
-    public static void main(String args[])
-    {
+    public static void main(String args[]) {
         int arr[] = {12, 11, 13, 5, 6, 7};
         int n = arr.length;
 
@@ -93,5 +91,11 @@ public class HeapSort
 
         System.out.println("Sorted array is");
         printArray(arr);
+
+        BTree bTree = new BTree();
+        Model bstInorderSuccesor = new Model();
+
+
+        System.out.println(bTree.equals(bstInorderSuccesor));
     }
 }
