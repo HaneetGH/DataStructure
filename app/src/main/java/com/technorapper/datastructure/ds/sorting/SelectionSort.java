@@ -1,5 +1,8 @@
 package com.technorapper.datastructure.ds.sorting;
 
+
+import com.technorapper.datastructure.ds.CustomImmu;
+
 /*Selection Sort
 Last Updated: 02-05-2019
 The selection sort algorithm sorts an array by repeatedly finding the minimum element (considering ascending order) from unsorted part and putting it at the beginning. The algorithm maintains two subarrays in a given array.
@@ -68,6 +71,11 @@ class SelectionSort {
         int arr[] = {64, 25, 12, 22, 11};
         ob.sort(arr);
         System.out.println("Sorted array");
-        ob.printArray(arr);
+     //   ob.printArray(arr);
+
+        CustomImmu c = new CustomImmu();
+
+        c.getName().add("value");
+        c.getName();
     }
 }
