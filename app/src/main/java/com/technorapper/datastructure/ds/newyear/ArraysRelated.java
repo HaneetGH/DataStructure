@@ -103,4 +103,56 @@ public class ArraysRelated {
         }
         System.out.println("Result is:-" + result);
     }
+
+/*
+First I find the max height and its index in the array. If there are duplicates, I look for the first occurence.
+
+The max height and index helps split the problem into two halves left and right. It basically helped me find the stopping criteria for traversing the array (start -> max in forward direction and end to max in reverse direction).
+
+I keep storing the water trapped by incrementing the "water" variable if my current height is greater than the future height. So the water = currHeight - future height, and keep incrementing the futureheight (start or end) index till curr height is greater if not you reset it to the current height and repeat the same steps.
+
+Time: O(n)
+Space: O(1)
+*/
+
+    public int trap(int[] height) {
+
+        int maxIndex = -1;
+        int maxHeight = -1;
+        for(int i = 0; i < height.length; i++) {
+            if(height[i] > maxHeight) {
+                maxHeight = height[i];
+                maxIndex = i;
+            }
+        }
+
+        int start = 0;
+        int water = 0;
+        int curr = height[start];
+        while(start < maxIndex) {
+            if(curr > height[start + 1]) {
+                water += (curr - height[start + 1]);
+                start++;
+            }
+            else {
+                start++;
+                curr = height[start];
+            }
+        }
+
+        int end = height.length - 1;
+        curr = height[end];
+        while(end > maxIndex) {
+            if(curr > height[end - 1]) {
+                water += (curr - height[end - 1]);
+                end--;
+            }
+            else {
+                end--;
+                curr = height[end];
+            }
+        }
+
+        return water;
+    }
 }
