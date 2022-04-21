@@ -2,7 +2,11 @@ package com.technorapper.datastructure.ds.newyear;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.EnumMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class ArraysRelated {
 
@@ -78,8 +82,11 @@ public class ArraysRelated {
     public static void main(String[] args) {
 
 
-        System.out.println(System.getenv("GOOGLE_DIRECTION_KEY"));
-        checkresult(15);
+        //System.out.println(System.getenv("GOOGLE_DIRECTION_KEY"));
+        //checkresult(15);
+        int A[] = {1, 4, 45, 6, 10, 8};
+        int sum = 22;
+        ThreeSum(A, sum);
     }
 
 
@@ -95,7 +102,7 @@ public class ArraysRelated {
             temp = (userresult / (X - X_MIN));
             result = (int) (10 - temp);
         } else if (userresult >= X && userresult < Y) {
-            temp = (userresult / (Y - X)*10);
+            temp = (userresult / (Y - X) * 10);
             result = (int) (10 - temp);
         } else if (userresult >= Y) {
             temp = (userresult / (Y_MAX - Y));
@@ -104,23 +111,56 @@ public class ArraysRelated {
         System.out.println("Result is:-" + result);
     }
 
-/*
-First I find the max height and its index in the array. If there are duplicates, I look for the first occurence.
+    /*
+    First I find the max height and its index in the array. If there are duplicates, I look for the first occurence.
 
-The max height and index helps split the problem into two halves left and right. It basically helped me find the stopping criteria for traversing the array (start -> max in forward direction and end to max in reverse direction).
+    The max height and index helps split the problem into two halves left and right. It basically helped me find the stopping criteria for traversing the array (start -> max in forward direction and end to max in reverse direction).
 
-I keep storing the water trapped by incrementing the "water" variable if my current height is greater than the future height. So the water = currHeight - future height, and keep incrementing the futureheight (start or end) index till curr height is greater if not you reset it to the current height and repeat the same steps.
+    I keep storing the water trapped by incrementing the "water" variable if my current height is greater than the future height. So the water = currHeight - future height, and keep incrementing the futureheight (start or end) index till curr height is greater if not you reset it to the current height and repeat the same steps.
 
-Time: O(n)
-Space: O(1)
-*/
+    Time: O(n)
+    Space: O(1)
+    */
+    public static List<List<Integer>> ThreeSum(int[] nums, int val) {
+        List<List<Integer>> returnList = new ArrayList<>();
+        List<Integer> smallList = new ArrayList<>();
+        for (int i = 0; i < nums.length; i++) {
+            int newVal = val - nums[i];
+            Set returnSet = createSetFromHere(nums[i], nums);
+            for (int j = i; j < nums.length; j++) {
+                int checkVal = newVal - nums[i + 1];
+
+                if (returnSet.contains(checkVal)) {
+
+                    smallList.add(nums[i]);
+                    smallList.add(nums[i + 1]);
+                    smallList.add(checkVal);
+                    returnList.add(smallList);
+                }
+
+            }
+        }
+
+
+        return returnList;
+    }
+
+    private static Set createSetFromHere(int i, int[] nums) {
+        Set set = new HashSet();
+        for (int x = 0; x < nums.length; x++) {
+            if (nums[x] != i)
+                set.add(nums[x]);
+        }
+
+        return set;
+    }
 
     public int trap(int[] height) {
 
         int maxIndex = -1;
         int maxHeight = -1;
-        for(int i = 0; i < height.length; i++) {
-            if(height[i] > maxHeight) {
+        for (int i = 0; i < height.length; i++) {
+            if (height[i] > maxHeight) {
                 maxHeight = height[i];
                 maxIndex = i;
             }
@@ -129,12 +169,11 @@ Space: O(1)
         int start = 0;
         int water = 0;
         int curr = height[start];
-        while(start < maxIndex) {
-            if(curr > height[start + 1]) {
+        while (start < maxIndex) {
+            if (curr > height[start + 1]) {
                 water += (curr - height[start + 1]);
                 start++;
-            }
-            else {
+            } else {
                 start++;
                 curr = height[start];
             }
@@ -142,12 +181,11 @@ Space: O(1)
 
         int end = height.length - 1;
         curr = height[end];
-        while(end > maxIndex) {
-            if(curr > height[end - 1]) {
+        while (end > maxIndex) {
+            if (curr > height[end - 1]) {
                 water += (curr - height[end - 1]);
                 end--;
-            }
-            else {
+            } else {
                 end--;
                 curr = height[end];
             }
