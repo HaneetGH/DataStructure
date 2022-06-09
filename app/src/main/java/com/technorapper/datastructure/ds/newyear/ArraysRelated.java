@@ -140,8 +140,6 @@ public class ArraysRelated {
 
             }
         }
-
-
         return returnList;
     }
 
