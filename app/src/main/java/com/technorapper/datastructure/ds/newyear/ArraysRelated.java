@@ -157,6 +157,7 @@ public class ArraysRelated {
         return reverse == x;
     }
     public String longestPalindrome(String s) {
+
         int start = 0;
         int end = 0;
         int maximum = 0;
