@@ -78,16 +78,109 @@ public class ArraysRelated {
         return ans;
     }
 
+    static void minCost(int costs[][], int N) {
+
+        // Corner Case
+        if (N == 0)
+            return;
+
+        // Auxiliary 2D dp array
+        int dp[][] = new int[N][3];
+
+        // Base Case
+        dp[0][0] = costs[0][0];
+        dp[0][1] = costs[0][1];
+        dp[0][2] = costs[0][2];
+
+        for (int i = 1; i < N; i++) {
+
+            // If current house is colored
+            // with red the take min cost of
+            // previous houses colored with
+            // (blue and green)
+            dp[i][0] = Math.min(dp[i - 1][1], dp[i - 1][2])
+                    + costs[i][0];
+
+            // If current house is colored
+            // with blue the take min cost of
+            // previous houses colored with
+            // (red and green)
+            dp[i][1] = Math.min(dp[i - 1][0], dp[i - 1][2])
+                    + costs[i][1];
+
+            // If current house is colored
+            // with green the take min cost of
+            // previous houses colored with
+            // (red and blue)
+            dp[i][2] = Math.min(dp[i - 1][0], dp[i - 1][1])
+                    + costs[i][2];
+        }
+
+        // Print the min cost of the
+        // last painted house
+        System.out.println(
+                Math.min(dp[N - 1][0],
+                        Math.min(dp[N - 1][1], dp[N - 1][2])));
+    }
+
+    static int maxProfit(int price[],
+                         int n, int k) {
+
+        int profit[][] = new int[k + 1][n + 1];
+        for (int i = 0; i <= k; i++)
+            profit[i][0] = 0;
+        for (int j = 0; j <= n; j++)
+            profit[0][j] = 0;
+        for (int i = 1; i <= k; i++) {
+            int prevDiff = Integer.MIN_VALUE;
+            for (int j = 1; j < n; j++) {
+                prevDiff = Math.max(prevDiff,
+                        profit[i - 1][j - 1] -
+                                price[j - 1]);
+                profit[i][j] = Math.max(profit[i][j - 1],
+                        price[j] + prevDiff);
+            }
+        }
+
+        return profit[k][n];
+    }
+
+    int solution(int[] costs) {
+        int sizeofArray = costs.length;
+        int inti = 3;
+        int profitArray[][] = new int[inti + 1][sizeofArray + 1];
+
+        for (int i = 0; i <= inti; i++)
+            profitArray[i][0] = 0;
+
+        for (int j = 0; j <= sizeofArray; j++)
+            profitArray[0][j] = 0;
+
+        for (int i = 1; i <= inti; i++) {
+
+            int last = Integer.MIN_VALUE;
+
+            for (int j = 0; j < sizeofArray; j++) {
+
+                last = Math.max(last, profitArray[i - 1][j - 1] - costs[j - 1]);
+                profitArray[i][j] = Math.max(profitArray[i][j - 1], costs[j] + last);
+            }
+
+        }
+
+        return profitArray[inti][sizeofArray - 1];
+
+
+    }
 
     // Driver code
     public static void main(String[] args) {
 
 
-        //System.out.println(System.getenv("GOOGLE_DIRECTION_KEY"));
-        //checkresult(15);
-        int A[] = {1, 4, 45, 6, 10, 8};
-        int sum = 22;
-        ThreeSum(A, sum);
+        int cost[][] = {{2, 9, 4}, {20, 7, 15}, {18, 12, 19}};
+        int prcosts[] = {6, 5, 3, 7, 1, 4};
+        //  maxProfit(cost, cost.length);
+        maxProfit(prcosts, prcosts.length, 3);
     }
 
 
@@ -157,6 +250,7 @@ public class ArraysRelated {
         }
         return reverse == x;
     }
+
     public String longestPalindrome(String s) {
 
         int start = 0;
@@ -196,6 +290,7 @@ public class ArraysRelated {
 
         return s.substring(start, end);
     }
+
     private static Set createSetFromHere(int i, int[] nums) {
         Set set = new HashSet();
         for (int x = 0; x < nums.length; x++) {
@@ -204,8 +299,9 @@ public class ArraysRelated {
         }
         return set;
     }
+
     public int solution1(int[] A) {
-        if (A.length == 0 || A.length== 1) {
+        if (A.length == 0 || A.length == 1) {
             return A.length;
         }
         int startingIndex = 0;
@@ -213,21 +309,18 @@ public class ArraysRelated {
         int[] locationVisitedCounter = new int[A.length];
         locationVisitedCounter[A[0] - 1] = 1;
 
-        for (var i=1; i<A.length; i++)
-        {
+        for (var i = 1; i < A.length; i++) {
             int locationIndex = A[i] - 1;
 
             locationVisitedCounter[locationIndex]++;
 
-            if (A[i] == A[i - 1])
-            {
+            if (A[i] == A[i - 1]) {
                 continue;
             }
 
-            endingIndex=i;
+            endingIndex = i;
 
-            while (locationVisitedCounter[A[startingIndex] - 1] > 1)
-            {
+            while (locationVisitedCounter[A[startingIndex] - 1] > 1) {
                 locationVisitedCounter[A[startingIndex] - 1]--;
                 startingIndex++;
             }
@@ -236,6 +329,7 @@ public class ArraysRelated {
 
         return endingIndex - startingIndex + 1;
     }
+
     public int trap(int[] height) {
 
         int maxIndex = -1;
