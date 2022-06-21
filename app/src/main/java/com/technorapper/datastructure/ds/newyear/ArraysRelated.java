@@ -167,10 +167,7 @@ public class ArraysRelated {
             }
 
         }
-
         return profitArray[inti][sizeofArray - 1];
-
-
     }
 
     // Driver code
