@@ -123,8 +123,7 @@ public class ArraysRelated {
                         Math.min(dp[N - 1][1], dp[N - 1][2])));
     }
 
-    static int maxProfit(int price[],
-                         int n, int k) {
+    static int maxProfit(int price[], int n, int k) {
 
         int profit[][] = new int[k + 1][n + 1];
         for (int i = 0; i <= k; i++)
