@@ -142,7 +142,28 @@ public class ArraysRelated {
         }
         return profit[k][n];
     }
+    public String longestCommonPrefix(String[] strs) {
+        String res="";
+        int j=0,i=0;
 
+        if(strs.length==1){
+            return strs[0];
+        }
+
+        for(i=0;i<strs[0].length();i++){
+            for(j=1;j<strs.length;j++){
+                if(strs[j].length()<=i){
+                    return res;
+                }
+                if(strs[j].charAt(i)!=strs[0].charAt(i)){
+                    return res;
+                }
+            }
+            res = res+strs[0].charAt(i);
+
+        }
+        return res;
+    }
     int solution(int[] costs) {
         int sizeofArray = costs.length;
         int inti = 3;
