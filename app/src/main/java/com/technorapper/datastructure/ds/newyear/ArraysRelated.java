@@ -140,7 +140,6 @@ public class ArraysRelated {
                         price[j] + prevDiff);
             }
         }
-
         return profit[k][n];
     }
 
