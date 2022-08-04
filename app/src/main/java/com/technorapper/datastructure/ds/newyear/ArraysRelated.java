@@ -144,6 +144,7 @@ public class ArraysRelated {
     }
     public String longestCommonPrefix(String[] strs) {
         String res="";
+
         int j=0,i=0;
 
         if(strs.length==1){
