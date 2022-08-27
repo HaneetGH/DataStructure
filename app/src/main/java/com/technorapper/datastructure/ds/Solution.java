@@ -215,12 +215,59 @@ class A {
         ab.getName();
         aa.getName();
 */
-        String[] str = {"Ram", "Sardar", "John", "Jacob"};
-        System.out.println(reverseThis(str, 0, str.length - 1));
+        int[][] str = {{2,9,4},{20,7,15},{18,12,19}};
+        System.out.println(solutiondd(str));
 
 
     }
 
+    static int solutionc(int[][] costs) {
+        if(costs==null||costs.length==0){
+            return 0;
+        }
+
+        int[][] matrix = new int[3][costs.length];
+
+        for(int j=0; j<costs.length; j++){
+            if(j==0){
+                matrix[0][j]=costs[j][0];
+                matrix[1][j]=costs[j][1];
+                matrix[2][j]=costs[j][2];
+            }else{
+                matrix[0][j]=Math.min(matrix[1][j-1], matrix[2][j-1])+costs[j][0];
+                matrix[1][j]=Math.min(matrix[0][j-1], matrix[2][j-1])+costs[j][1];
+                matrix[2][j]=Math.min(matrix[0][j-1], matrix[1][j-1])+costs[j][2];
+            }
+        }
+
+        int result = Math.min(matrix[0][costs.length-1], matrix[1][costs.length-1]);
+        result = Math.min(result, matrix[2][costs.length-1]);
+
+        return result;
+    }
+    static int solutiondd(int[][] times) {
+        if(times==null||times.length==0){
+            return 0;
+        }
+        int[][] generator = new int[3][times.length];
+
+        for(int i=0;i<times.length;i++){
+            if(i==0){
+                generator[0][i]=times[i][0];
+                generator[1][i]=times[i][1];
+                generator[2][i]=times[i][2];
+            } else {
+                generator[0][i] = Math.min(generator[1][i-1], generator[2][i-1]+times[i][0]);
+                generator[1][i] =  Math.min(generator[0][i-1], generator[2][i-1]+times[i][1]);
+                generator[2][i] =  Math.min(generator[0][i-1], generator[1][i-1]+times[i][2]);
+            }
+
+        }
+        int result =  Math.min(generator[0][times.length-1], generator[1][times.length-1]);
+        result = Math.min(result, generator[2][times.length-1]);
+
+        return result;
+    }
     public static class Parent {
         public void getName() {
 

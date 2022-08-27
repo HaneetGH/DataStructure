@@ -1,3 +1,4 @@
+/*
 package com.technorapper.datastructure.ds.newyear;
 
 import java.util.ArrayList;
@@ -126,7 +127,6 @@ public class ArraysRelated {
     static int maxProfit(int price[], int n, int k) {
 
         int profit[][] = new int[k + 1][n + 1];
-        for (int i = 0; i <= k; i++)
             profit[i][0] = 0;
         for (int j = 0; j <= n; j++)
             profit[0][j] = 0;
@@ -137,46 +137,33 @@ public class ArraysRelated {
                         profit[i - 1][j - 1] -
                                 price[j - 1]);
                 profit[i][j] = Math.max(profit[i][j - 1],
-                        price[j] + prevDiff);
-            }
         }
         return profit[k][n];
     }
+    public String longestCommonPrefix(String[] strs) {
+        String res="";
+        int j=0,i=0;
+        if(strs.length==1){
+            return strs[0];
 
-    int solution(int[] costs) {
-        int sizeofArray = costs.length;
-        int inti = 3;
-        int profitArray[][] = new int[inti + 1][sizeofArray + 1];
-
-        for (int i = 0; i <= inti; i++)
-            profitArray[i][0] = 0;
-
-        for (int j = 0; j <= sizeofArray; j++)
-            profitArray[0][j] = 0;
-
-        for (int i = 1; i <= inti; i++) {
-
-            int last = Integer.MIN_VALUE;
-
-            for (int j = 0; j < sizeofArray; j++) {
-
-                last = Math.max(last, profitArray[i - 1][j - 1] - costs[j - 1]);
-                profitArray[i][j] = Math.max(profitArray[i][j - 1], costs[j] + last);
+        for(i=0;i<strs[0].length();i++){
+            for(j=1;j<strs.length;j++){
+                if(strs[j].length()<=i){
+                    return res;
+                }
+                if(strs[j].charAt(i)!=strs[0].charAt(i)){
+                    return res;
+                }
             }
+            res = res+strs[0].charAt(i);
 
         }
-        return profitArray[inti][sizeofArray - 1];
+        return res;
     }
+
 
     // Driver code
-    public static void main(String[] args) {
 
-
-        int cost[][] = {{2, 9, 4}, {20, 7, 15}, {18, 12, 19}};
-        int prcosts[] = {6, 5, 3, 7, 1, 4};
-        //  maxProfit(cost, cost.length);
-        maxProfit(prcosts, prcosts.length, 3);
-    }
 
 
     public static void checkresult(float userresult) {
@@ -200,7 +187,8 @@ public class ArraysRelated {
         System.out.println("Result is:-" + result);
     }
 
-    /*
+    */
+/*
     First I find the max height and its index in the array. If there are duplicates, I look for the first occurence.
 
     The max height and index helps split the problem into two halves left and right. It basically helped me find the stopping criteria for traversing the array (start -> max in forward direction and end to max in reverse direction).
@@ -209,7 +197,8 @@ public class ArraysRelated {
 
     Time: O(n)
     Space: O(1)
-    */
+    *//*
+
     public static List<List<Integer>> ThreeSum(int[] nums, int val) {
         List<List<Integer>> returnList = new ArrayList<>();
         List<Integer> smallList = new ArrayList<>();
@@ -364,3 +353,4 @@ public class ArraysRelated {
         return water;
     }
 }
+*/
