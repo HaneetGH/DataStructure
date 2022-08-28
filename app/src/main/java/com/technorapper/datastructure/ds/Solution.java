@@ -1,6 +1,10 @@
 package com.technorapper.datastructure.ds;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 import java.util.Set;
 import java.util.SortedSet;
@@ -215,59 +219,127 @@ class A {
         ab.getName();
         aa.getName();
 */
-        int[][] str = {{2,9,4},{20,7,15},{18,12,19}};
-        System.out.println(solutiondd(str));
+        int[][] str = {{2, 9, 4}, {20, 7, 15}, {18, 12, 19}};
+        String s = "cbaebabacd", p = "abc";
+        System.out.println(findAnagrams(s, p));
 
 
     }
 
     static int solutionc(int[][] costs) {
-        if(costs==null||costs.length==0){
+        if (costs == null || costs.length == 0) {
             return 0;
         }
 
         int[][] matrix = new int[3][costs.length];
 
-        for(int j=0; j<costs.length; j++){
-            if(j==0){
-                matrix[0][j]=costs[j][0];
-                matrix[1][j]=costs[j][1];
-                matrix[2][j]=costs[j][2];
-            }else{
-                matrix[0][j]=Math.min(matrix[1][j-1], matrix[2][j-1])+costs[j][0];
-                matrix[1][j]=Math.min(matrix[0][j-1], matrix[2][j-1])+costs[j][1];
-                matrix[2][j]=Math.min(matrix[0][j-1], matrix[1][j-1])+costs[j][2];
+        for (int j = 0; j < costs.length; j++) {
+            if (j == 0) {
+                matrix[0][j] = costs[j][0];
+                matrix[1][j] = costs[j][1];
+                matrix[2][j] = costs[j][2];
+            } else {
+                matrix[0][j] = Math.min(matrix[1][j - 1], matrix[2][j - 1]) + costs[j][0];
+                matrix[1][j] = Math.min(matrix[0][j - 1], matrix[2][j - 1]) + costs[j][1];
+                matrix[2][j] = Math.min(matrix[0][j - 1], matrix[1][j - 1]) + costs[j][2];
             }
         }
 
-        int result = Math.min(matrix[0][costs.length-1], matrix[1][costs.length-1]);
-        result = Math.min(result, matrix[2][costs.length-1]);
+        int result = Math.min(matrix[0][costs.length - 1], matrix[1][costs.length - 1]);
+        result = Math.min(result, matrix[2][costs.length - 1]);
 
         return result;
     }
+
+    public static List<Integer> findAnagramsHashmap(String s, String p) {
+        List<Integer> result = new ArrayList<>();
+
+        int windowSize = p.length();
+      //  HashMap<Character, Integer> hashmapOne = getHashMap(p);
+        char[] sortedString = p.toCharArray();
+        Arrays.sort(sortedString);
+        for (int i = 0; i < s.length(); i++) {
+            if (i+windowSize>s.length())
+            {
+                break;
+            }
+            String newString = s.substring(i, i + windowSize);
+           // HashMap<Character, Integer> hashmapTwo = getHashMap(newString);
+            char[] sortedString2 = newString.toCharArray();
+            Arrays.sort(sortedString2);
+            if (Arrays.equals(sortedString, sortedString2)) {
+                result.add(i);
+            }
+        }
+        return result;
+    }
+    public static List<Integer> findAnagrams(String s, String p) {
+        int[] map = new int[26];
+        List<Integer> result = new ArrayList<>();
+
+        for(int i=0;i<p.length();i++){
+            map[p.charAt(i) - 'a']++;
+        }
+
+        int windowStart = 0;
+        int windowEnd = 0;
+        while(windowEnd<s.length()){
+            // valid anagram
+            if(map[s.charAt(windowEnd) - 'a'] > 0){
+                map[s.charAt(windowEnd++) - 'a']--;
+                // window size equal to size of P
+                if(windowEnd-windowStart ==  p.length()){
+                    result.add(windowStart);
+                }
+            }
+            // window is of size 0
+            else if(windowStart == windowEnd){
+                windowStart ++;
+                windowEnd ++;
+            }
+            // decrease window size
+            else{
+                map[s.charAt(windowStart++) - 'a']++;
+            }
+        }
+        return result;
+    }
+    public static HashMap<Character, Integer> getHashMap(String str) {
+        HashMap<Character, Integer> toBeMatch = new HashMap<>();
+        for (Character character : str.toCharArray()) {
+            if (!toBeMatch.containsKey(character)) {
+                toBeMatch.put(character, 1);
+            } else {
+                toBeMatch.put(character, toBeMatch.get(character) + 1);
+            }
+        }
+        return toBeMatch;
+    }
+
     static int solutiondd(int[][] times) {
-        if(times==null||times.length==0){
+        if (times == null || times.length == 0) {
             return 0;
         }
         int[][] generator = new int[3][times.length];
 
-        for(int i=0;i<times.length;i++){
-            if(i==0){
-                generator[0][i]=times[i][0];
-                generator[1][i]=times[i][1];
-                generator[2][i]=times[i][2];
+        for (int i = 0; i < times.length; i++) {
+            if (i == 0) {
+                generator[0][i] = times[i][0];
+                generator[1][i] = times[i][1];
+                generator[2][i] = times[i][2];
             } else {
-                generator[0][i] = Math.min(generator[1][i-1], generator[2][i-1]+times[i][0]);
-                generator[1][i] =  Math.min(generator[0][i-1], generator[2][i-1]+times[i][1]);
-                generator[2][i] =  Math.min(generator[0][i-1], generator[1][i-1]+times[i][2]);
+                generator[0][i] = Math.min(generator[1][i - 1], generator[2][i - 1] + times[i][0]);
+                generator[1][i] = Math.min(generator[0][i - 1], generator[2][i - 1] + times[i][1]);
+                generator[2][i] = Math.min(generator[0][i - 1], generator[1][i - 1] + times[i][2]);
             }
 
         }
-        int result =  Math.min(generator[0][times.length-1], generator[1][times.length-1]);
-        result = Math.min(result, generator[2][times.length-1]);
+        int result = Math.min(generator[0][times.length - 1], generator[1][times.length - 1]);
+        result = Math.min(result, generator[2][times.length - 1]);
 
         return result;
     }
+
     public static class Parent {
         public void getName() {
 
@@ -449,7 +521,7 @@ Output : "j-Ih%gfE-dCba"
         strArray[last] = holder;
 
         //return reverseThis(strArray, ++first, --last);
-        return reverseThis(strArray, first+1, last-1);
+        return reverseThis(strArray, first + 1, last - 1);
 
     }
 
